@@ -1,4 +1,4 @@
-<?php
+<?php 
   require('db.php');
   $data = json_decode(file_get_contents('php://input'));
   $gamedata = mysqli_real_escape_string($link, json_encode($data->{'gamedata'}));
@@ -15,4 +15,3 @@
     echo json_encode([mysqli_insert_id($link)]);
   }
 ?>
-

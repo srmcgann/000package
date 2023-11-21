@@ -1,4 +1,4 @@
-<?php
+<?php 
   require('db.php');
   $data = json_decode(file_get_contents('php://input'));
   $gameID = mysqli_real_escape_string($link, $data->{'gameID'});
@@ -58,8 +58,8 @@
         case 3: $col = 'gamedataD'; break;
       }
       if($row[$col]){
-        $gamedata = json_decode($row[$col]);
-        if(key_exists('lastUpdate', $gamedata)){
+	$gamedata = json_decode($row[$col]);
+        if($gamedata->{'lastUpdate'}){
           if(time() - $gamedata->{'lastUpdate'} > 10){
             $sql = 'UPDATE tetrisGames SET ' . $col . ' = "" WHERE id = ' . $gameID;
             mysqli_query($link, $sql);
@@ -75,4 +75,3 @@
     echo json_encode([$playerNumber, $gameID, $row, $playerName, $receiveddata]);
   }
 ?>
-
